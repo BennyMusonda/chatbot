@@ -26,3 +26,31 @@ main{
     font-size: 22px;
     font-weight: 800;
 }
+.input-field{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 0;
+    transform: translate(0, 45rem);
+}
+.input-field input{
+    width: 90%;
+    height: 3rem;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    background-color: #bbb;
+    padding-left: 20px;
+    color: white;
+    font-weight: 500;
+}
+.input-field input::placeholder{
+    color: white;
+}
+.send-btn a{
+    color: green;
+    font-size: 1.8rem;
+    position: absolute;
+    right: 4%;
+    bottom: 6px;
+}
