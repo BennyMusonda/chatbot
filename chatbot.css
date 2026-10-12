@@ -40,6 +40,10 @@ main{
     font-weight: 800;
 }
 
+span{
+    color: green;
+}
+
 .input-field{
     display: flex;
     justify-content: center;
@@ -78,6 +82,17 @@ main{
     transform: translateY(-50%);
 }
 
+.output{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.output img{
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
 .output-text{
     margin: 10px;
     background-color: #bbb;
@@ -85,6 +100,30 @@ main{
     height: 5rem;
     color: yellow;
     background-color: purple;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-top: 8px;
+}
+
+
+.input{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.input img{
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.input-text{
+    margin: 10px;
+    background-color: #bbb;
+    width: 30rem;
+    height: 5rem;
+    color: purple;
+    background-color: yellowgreen;
     border-radius: 20px;
     padding-left: 20px;
     padding-top: 8px;
