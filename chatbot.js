@@ -12,6 +12,18 @@ sendBtn.addEventListener('click', () => {
 
     const userMessage = textField.value.trim();
 
+    // 2.a) SEND MESSAGE USING ENTER KEY
+
+textField.addEventListener('keydown', (event) => {
+
+    if(event.key === "Enter") {
+
+        sendBtn.click();
+
+    }
+
+});
+
     // A. CHECK IF THE INPUT IS EMPTY
 
     if(userMessage === ""){
