@@ -1,7 +1,5 @@
 // 1. SELECT HTML ELEMENTS
-
-const inputText = document.getElementById('inputText');
-const outputText = document.getElementById('outputText');
+const chatContainer = document.getElementById('chatContainer');
 const textField = document.getElementById('textField');
 const sendBtn = document.getElementById('sendBtn');
 
@@ -12,7 +10,70 @@ sendBtn.addEventListener('click', () => {
 
     const userMessage = textField.value.trim();
 
-    // 2.a) SEND MESSAGE USING ENTER KEY
+    // CHECK EMPTY INPUT
+    if(userMessage === "") {
+        return;
+    }
+
+    // DISPLAY USER MESSAGE
+    displayMessage(userMessage, "user");
+
+    // GENERATE CHATBOT RESPONSE
+    const response = chatbotResponse(userMessage);
+
+    // DISPLAY CHATBOT RESPONSE
+    displayMessage(response, "bot");
+
+    // CLEAR INPUT FIELD
+    textField.value = "";
+
+});
+
+// 3. CHATBOT RESPONSE FUNCTION
+
+function chatbotResponse(userMessage) {
+
+    userMessage = userMessage.toLowerCase();
+
+    if(userMessage === "hello") {
+
+        return "Hello! How are you today?";
+
+    }
+
+    else if(userMessage === "hi") {
+
+        return "Hi there! Welcome!";
+
+    }
+
+    else if(userMessage === "how are you?") {
+
+        return "I'm doing great! Thanks for asking.";
+
+    }
+
+    else if(userMessage === "who created you?") {
+
+        return "I was created by Benny, a Tech Guy.";
+
+    }
+
+    else if(userMessage === "bye") {
+
+        return "Goodbye! Have a wonderful day.";
+
+    }
+
+    else {
+
+        return "Sorry, I don't understand that yet.";
+
+    }
+
+}
+
+// 4. SEND MESSAGE USING ENTER KEY
 
 textField.addEventListener('keydown', (event) => {
 
@@ -24,55 +85,41 @@ textField.addEventListener('keydown', (event) => {
 
 });
 
-    // A. CHECK IF THE INPUT IS EMPTY
+// 5. CREATE MESSAGE FUNCTION
 
-    if(userMessage === ""){
-        return;
+function displayMessage(message, sender) {
+
+    // CREATE MESSAGE ROW
+    const messageRow = document.createElement("div");
+
+    // ADD CSS CLASS
+    messageRow.classList.add("message-row", sender);
+
+    // CREATE PROFILE IMAGE
+    const profileImg = document.createElement("img");
+
+    // SELECT PROFILE IMAGE
+    if(sender === "user") {
+        profileImg.src = "imgs/benny 1.jpg.jpeg";
+    }
+    else {
+        profileImg.src = "imgs/PXL_20260828_133354894~2.jpg";
     }
 
-    // B. DISPLAY USER MESSAGE
+    // CREATE MESSAGE BUBBLE
+    const messageBubble = document.createElement("div");
 
-    inputText.textContent = userMessage;
+    messageBubble.classList.add("message-bubble");
 
-    // C. CALL CHATBOT FUNCTION
+    // INSERT MESSAGE TEXT
+    messageBubble.textContent = message;
 
-    chatbotResponse(userMessage);
+    // ADD ELEMENTS TO MESSAGE ROW
+    messageRow.appendChild(profileImg);
 
-    // D. CLEAR INPUT FIELD
+    messageRow.appendChild(messageBubble);
 
-    textField.value = "";
-
-});
-
-
-// 3. CHATBOT RESPONSE FUNCTION
-
-function chatbotResponse(userMessage){
-
-    userMessage = userMessage.toLowerCase();
-
-    if(userMessage === "hello"){
-        outputText.textContent = "Hello! How are you today?";
-    }
-
-    else if(userMessage === "hi"){
-        outputText.textContent = "Hi there, Welcome!";
-    }
-
-    else if(userMessage === "how are you?"){
-        outputText.textContent = "I'm doing great! Thanks for asking.";
-    }
-
-    else if(userMessage === "who created you?"){
-        outputText.textContent = "I was created by Benny, a Tech Guy.";
-    }
-
-    else if(userMessage === "bye"){
-        outputText.textContent = "Goodbye! Have a wonderful day.";
-    }
-
-    else{
-        outputText.textContent = "Sorry, I don't understand that yet.";
-    }
+    // ADD MESSAGE ROW TO CHAT CONTAINER
+    chatContainer.appendChild(messageRow);
 
 }

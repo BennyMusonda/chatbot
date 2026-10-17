@@ -1,9 +1,11 @@
+/* Reset default spacing and make dimensions include padding and borders. */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Center the chat window in the page and set the page colors. */
 body {
     display: flex;
     justify-content: center;
@@ -13,6 +15,7 @@ body {
     color: white;
 }
 
+/* Main chat window: define its layout, size, clipping, and appearance. */
 main {
     position: relative;
     display: flex;
@@ -28,6 +31,7 @@ main {
     border-radius: 40px;
 }
 
+/* Chat title typography and alignment. */
 .main-title {
     margin: 20px;
     font-family: Arial, Helvetica, sans-serif;
@@ -36,61 +40,88 @@ main {
     text-align: center;
 }
 
+/* Highlight inline spans with the accent color. */
 span {
     color: yellowgreen;
 }
 
-/* INPUT DISPLAY TEXT */
-.input {
+/* CHAT CONVERSATION AREA */
+
+/* Conversation area: stack messages, add spacing, and enable scrolling. */
+.chat-container {
     display: flex;
-    align-items: center;
-    margin: 10px;
+    flex-direction: column;
+    flex: 1;
+    gap: 15px;
+    padding: 20px;
+    overflow-y: auto;
+    margin-bottom: 80px;
 }
 
-.input-img img {
-    width: 3rem;
-    height: 3rem;
-    object-fit: cover;
-    border-radius: 50%;
+/* MESSAGE ROW */
+
+/* Shared layout for each message and its profile image. */
+.message-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 85%;
 }
 
-.input-text {
-    width: 30rem;
-    height: 5rem;
-    margin: 10px;
-    padding-top: 8px;
-    padding-left: 20px;
-    color: purple;
+/* USER MESSAGE */
+
+/* Outgoing messages align right and reverse avatar/bubble order. */
+.message-row.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+/* BOT MESSAGE */
+
+/* Incoming messages align to the left. */
+.message-row.bot {
+    align-self: flex-start;
+}
+
+/* MESSAGE BUBBLE */
+
+/* Shared message bubble spacing, shape, typography, and text wrapping. */
+.message-bubble {
+    padding: 12px 16px;
+    border-radius: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+/* USER BUBBLE */
+
+/* Outgoing bubble colors. */
+.user .message-bubble {
     background-color: yellowgreen;
-    border-radius: 20px;
+    color: purple;
 }
 
-/* OUTPUT DISPLAY TEXT */
-.output {
-    display: flex;
-    align-items: center;
-    margin: 10px;
+/* BOT BUBBLE */
+
+/* Incoming bubble colors. */
+.bot .message-bubble {
+    background-color: purple;
+    color: white;
 }
 
-.output-img img {
-    width: 3rem;
-    height: 3rem;
+/* PROFILE IMAGES */
+
+/* Keep profile images consistently sized and circular. */
+.message-row img {
+    width: 35px;
+    height: 35px;
     object-fit: cover;
     border-radius: 50%;
-}
-
-.output-text {
-    width: 30rem;
-    height: 5rem;
-    margin: 10px;
-    padding-top: 8px;
-    padding-left: 20px;
-    color: yellowgreen;
-    background-color: purple;
-    border-radius: 20px;
 }
 
 /* INPUT FIELD */
+/* Anchor the composer at the bottom of the chat window. */
 .input-field {
     position: absolute;
     bottom: 0;
@@ -103,6 +134,7 @@ span {
     margin-top: auto;
 }
 
+/* Text input styling, with space reserved for the send control. */
 .input-field input {
     width: 100%;
     height: 3rem;
@@ -116,10 +148,12 @@ span {
     outline: none;
 }
 
+/* Placeholder text color. */
 .input-field input::placeholder {
     color: grey;
 }
 
+/* Position and style the send control within the composer. */
 .send-btn a {
     position: absolute;
     top: 50%;
