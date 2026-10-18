@@ -162,3 +162,12 @@ span {
     font-size: 1.8rem;
     transform: translateY(-50%);
 }
+/* Typing Indicator */
+
+.typing-indicator {
+    padding: 12px 16px;
+    margin-left: 45px;
+    color: yellowgreen;
+    font-size: 13px;
+    font-style: italic;
+}

@@ -18,16 +18,45 @@ sendBtn.addEventListener('click', () => {
     // DISPLAY USER MESSAGE
     displayMessage(userMessage, "user");
 
-    // GENERATE CHATBOT RESPONSE
-    const response = chatbotResponse(userMessage);
-
-    // DISPLAY CHATBOT RESPONSE
-    displayMessage(response, "bot");
-
     // CLEAR INPUT FIELD
     textField.value = "";
 
+    // SHOW TYPING INDICATOR
+    const typing = showTypingIndicator();
+
+    // GENERATE RESPONSE AFTER 2 SECONDS
+    setTimeout(() => {
+
+        const response = chatbotResponse(userMessage);
+
+        // REMOVE TYPING INDICATOR
+        typing.remove();
+
+        // DISPLAY CHATBOT RESPONSE
+        displayMessage(response, "bot");
+
+    }, 2000);
+
 });
+
+
+// 6. CHATBOT TYPING INDICATOR
+
+function showTypingIndicator() {
+
+    const typingMessage = document.createElement("div");
+
+    typingMessage.classList.add("typing-indicator");
+
+    typingMessage.textContent = "Messenger AI is typing...";
+
+    chatContainer.appendChild(typingMessage);
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    return typingMessage;
+
+}
 
 // 3. CHATBOT RESPONSE FUNCTION
 
