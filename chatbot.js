@@ -58,48 +58,47 @@ function showTypingIndicator() {
 
 }
 
-// 3. CHATBOT RESPONSE FUNCTION
+// GENERATE CHATBOT RESPONSES
 
 function chatbotResponse(userMessage) {
 
+    // CONVERT MESSAGE TO LOWERCASE
     userMessage = userMessage.toLowerCase();
 
-    if(userMessage === "hello") {
-
-        return "Hello! How are you today?";
-
+    // GREETINGS
+    if(userMessage.includes("hello") || userMessage.includes("hi") || userMessage.includes("hey")) {
+        return "Hello! Welcome to Messenger AI. How can I help you?";
     }
 
-    else if(userMessage === "hi") {
-
-        return "Hi there! Welcome!";
-
+    // ASKING ABOUT THE BOT
+    else if(userMessage.includes("who are you")) {
+        return "I am Messenger AI, a chatbot created by Benny!";
     }
 
-    else if(userMessage === "how are you?") {
-
-        return "I'm doing great! Thanks for asking.";
-
-    }
-
-    else if(userMessage === "who created you?") {
-
+    // ASKING ABOUT THE CREATOR
+    else if(userMessage.includes("who created you") || userMessage.includes("your creator")) {
         return "I was created by Benny, a Tech Guy.";
-
     }
 
-    else if(userMessage === "bye") {
+    // ASKING HOW THE BOT IS
+    else if(userMessage.includes("how are you")) {
+        return "I'm doing great! Thanks for asking. How about you?";
+    }
 
+    // SAYING GOODBYE
+    else if(userMessage.includes("bye") || userMessage.includes("goodbye")) {
         return "Goodbye! Have a wonderful day.";
-
     }
 
+    // THANKING THE BOT
+    else if(userMessage.includes("thank you") || userMessage.includes("thanks")) {
+        return "You're welcome! Happy to help.";
+    }
+
+    // UNKNOWN MESSAGE
     else {
-
-        return "Sorry, I don't understand that yet.";
-
+        return "I'm still learning. Could you try asking me something else?";
     }
-
 }
 
 // 4. SEND MESSAGE USING ENTER KEY
