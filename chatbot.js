@@ -1,3 +1,6 @@
+// 0. CHATBOT CONVERSATION MEMORY
+let userName = "";
+
 // 1. SELECT HTML ELEMENTS
 const chatContainer = document.getElementById('chatContainer');
 const textField = document.getElementById('textField');
@@ -64,6 +67,33 @@ function chatbotResponse(userMessage) {
 
     // CONVERT MESSAGE TO LOWERCASE
     userMessage = userMessage.toLowerCase();
+
+    //REMEMBER USER'S NAME
+    if(userMessage.includes("my name is")) {
+
+    userName = userMessage.replace("my name is", "").trim();
+
+    return `Nice to meet you, ${userName}! I'll remember your name.`;
+
+}
+
+// RECALL USER'S NAME
+
+else if(userMessage.includes("what is my name")) {
+
+    if(userName !== "") {
+
+        return `Your name is ${userName}!`;
+
+    }
+
+    else {
+
+        return "I don't know your name yet. Tell me by saying: My name is then add your name.";
+
+    }
+
+}
 
     // GREETINGS
     if(userMessage.includes("hello") || userMessage.includes("hi") || userMessage.includes("hey")) {
