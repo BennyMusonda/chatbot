@@ -1,5 +1,9 @@
 // 0. CHATBOT CONVERSATION MEMORY
+// CHATBOT CONVERSATION MEMORY
+
 let userName = "";
+let userInterest = "";
+let userLearning = "";
 
 // 1. SELECT HTML ELEMENTS
 const chatContainer = document.getElementById('chatContainer');
@@ -90,6 +94,61 @@ else if(userMessage.includes("what is my name")) {
     else {
 
         return "I don't know your name yet. Tell me by saying: My name is then add your name.";
+
+    }
+
+}
+
+// REMEMBER WHAT THE USER IS LEARNING
+
+else if(userMessage.includes("i am learning")) {
+
+    userLearning = userMessage.replace("i am learning", "").trim();
+
+    return `That's wonderful! I'll remember that you're learning ${userLearning}.`;
+
+}
+
+// RECALL WHAT THE USER IS LEARNING
+
+else if(userMessage.includes("what am i learning")) {
+
+    if(userLearning !== "") {
+
+        return `You're learning ${userLearning}!`;
+
+    }
+
+    else {
+
+        return "You haven't told me what you're learning yet.";
+
+    }
+
+}
+
+// REMEMBER USER INTERESTS
+
+else if(userMessage.includes("i am interested in")) {
+
+    userInterest = userMessage.replace("i am interested in", "").trim();
+
+    return `That's interesting! I'll remember that you're interested in ${userInterest}.`;
+
+}
+// RECALL USER INTERESTS
+
+else if(userMessage.includes("what am i interested in")) {
+
+    if(userInterest !== "") {
+
+        return `You're interested in ${userInterest}!`;
+
+    }
+
+    else {
+
+        return "You haven't told me about your interests yet.";
 
     }
 
