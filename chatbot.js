@@ -10,6 +10,29 @@ const chatContainer = document.getElementById('chatContainer');
 const textField = document.getElementById('textField');
 const sendBtn = document.getElementById('sendBtn');
 
+// SAVE USER MEMORY
+
+function saveMemory() {
+
+    localStorage.setItem("userName", userName);
+
+    localStorage.setItem("userInterest", userInterest);
+
+    localStorage.setItem("userLearning", userLearning);
+
+}
+
+// LOAD USER MEMORY
+
+function loadMemory() {
+
+    userName = localStorage.getItem("userName") || "";
+
+    userInterest = localStorage.getItem("userInterest") || "";
+
+    userLearning = localStorage.getItem("userLearning") || "";
+
+}
 
 // 2. SEND BUTTON EVENT LISTENER
 
@@ -65,7 +88,7 @@ function showTypingIndicator() {
 
 }
 
-// GENERATE CHATBOT RESPONSES
+// GENERATE CHATBOT RESPONSE
 
 function chatbotResponse(userMessage) {
 
@@ -76,6 +99,8 @@ function chatbotResponse(userMessage) {
     if(userMessage.includes("my name is")) {
 
     userName = userMessage.replace("my name is", "").trim();
+
+    saveMemory();
 
     return `Nice to meet you, ${userName}! I'll remember your name.`;
 
@@ -105,6 +130,8 @@ else if(userMessage.includes("i am learning")) {
 
     userLearning = userMessage.replace("i am learning", "").trim();
 
+    saveMemory();
+
     return `That's wonderful! I'll remember that you're learning ${userLearning}.`;
 
 }
@@ -132,6 +159,8 @@ else if(userMessage.includes("what am i learning")) {
 else if(userMessage.includes("i am interested in")) {
 
     userInterest = userMessage.replace("i am interested in", "").trim();
+    
+    saveMemory();
 
     return `That's interesting! I'll remember that you're interested in ${userInterest}.`;
 
@@ -240,3 +269,7 @@ function displayMessage(message, sender) {
     chatContainer.appendChild(messageRow);
 
 }
+
+// LOAD MEMORY WHEN CHATBOT STARTS
+
+loadMemory();
