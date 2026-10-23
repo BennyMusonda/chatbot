@@ -124,6 +124,18 @@ else if(userMessage.includes("what is my name")) {
 
 }
 
+// FORGET USER'S NAME
+
+else if(userMessage.includes("forget my name")) {
+
+    userName = "";
+
+    localStorage.removeItem("userName");
+
+    return "Okay! I've forgotten your name.";
+
+}
+
 // REMEMBER WHAT THE USER IS LEARNING
 
 else if(userMessage.includes("i am learning")) {
@@ -154,6 +166,18 @@ else if(userMessage.includes("what am i learning")) {
 
 }
 
+// FORGET WHAT THE USER IS LEARNING
+
+else if(userMessage.includes("forget what i am learning")) {
+
+    userLearning = "";
+
+    localStorage.removeItem("userLearning");
+
+    return "Okay! I've forgotten what you're learning.";
+
+}
+
 // REMEMBER USER INTERESTS
 
 else if(userMessage.includes("i am interested in")) {
@@ -180,6 +204,38 @@ else if(userMessage.includes("what am i interested in")) {
         return "You haven't told me about your interests yet.";
 
     }
+
+}
+
+// FORGET USER'S INTERESTS
+
+else if(userMessage.includes("forget my interests")) {
+
+    userInterest = "";
+
+    localStorage.removeItem("userInterest");
+
+    return "Okay! I've forgotten your interests.";
+
+}
+
+// CLEAR ALL CHATBOT MEMORIES
+
+else if(userMessage.includes("forget everything")) {
+
+    userName = "";
+
+    userInterest = "";
+
+    userLearning = "";
+
+    localStorage.removeItem("userName");
+
+    localStorage.removeItem("userInterest");
+
+    localStorage.removeItem("userLearning");
+
+    return "I've cleared all your saved memories.";
 
 }
 
