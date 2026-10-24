@@ -315,6 +315,18 @@ function displayMessage(message, sender) {
 
     // INSERT MESSAGE TEXT
     messageBubble.textContent = message;
+    // CREATE MESSAGE TIMESTAMP
+
+const timestamp = document.createElement("small");
+
+timestamp.classList.add("message-time");
+
+timestamp.textContent = new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit"
+});
+
+messageBubble.appendChild(timestamp);
 
     // ADD ELEMENTS TO MESSAGE ROW
     messageRow.appendChild(profileImg);
