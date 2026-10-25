@@ -6,6 +6,7 @@ let userInterest = "";
 let userLearning = "";
 
 // 1. SELECT HTML ELEMENTS
+const clearChatBtn = document.getElementById("clearChatBtn");
 const chatContainer = document.getElementById('chatContainer');
 const textField = document.getElementById('textField');
 const sendBtn = document.getElementById('sendBtn');
@@ -337,6 +338,29 @@ messageBubble.appendChild(timestamp);
     chatContainer.appendChild(messageRow);
 
 }
+
+// CLEAR CHAT HISTORY
+
+clearChatBtn.addEventListener("click", () => {
+
+    // ASK FOR CONFIRMATION
+    const confirmClear = confirm("Are you sure you want to clear your chat?");
+
+    if(confirmClear) {
+
+        // CLEAR SAVED CHAT HISTORY
+        chatHistory = [];
+
+        localStorage.removeItem("chatHistory");
+
+        // REMOVE MESSAGES FROM THE SCREEN
+        chatContainer.querySelectorAll(".message-row, .typing-indicator").forEach(element => {
+            element.remove();
+        });
+
+    }
+
+});
 
 // LOAD MEMORY WHEN CHATBOT STARTS
 

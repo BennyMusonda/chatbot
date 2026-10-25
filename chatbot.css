@@ -181,3 +181,26 @@ span {
     opacity: 0.65;
     text-align: right;
 }
+
+/* CHAT HEADER */
+.chat-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* CLEAR CHAT BUTTON */
+#clearChatBtn {
+    padding: 8px 12px;
+    color: white;
+    background-color: purple;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#clearChatBtn:hover {
+    background-color: yellowgreen;
+    color: black;
+}
