@@ -241,9 +241,10 @@ else if(userMessage.includes("forget everything")) {
 }
 
     // GREETINGS
-    if(userMessage.includes("hello") || userMessage.includes("hi") || userMessage.includes("hey")) {
-        return "Hello! Welcome to Messenger AI. How can I help you?";
-    }
+    // GREETINGS
+if(/\b(hello|hi|hey|good morning|good afternoon|good evening)\b/.test(userMessage)) {
+    return "Hello! Welcome to Messenger AI. How can I help you?";
+}
 
     // ASKING ABOUT THE BOT
     else if(userMessage.includes("who are you")) {
@@ -261,14 +262,18 @@ else if(userMessage.includes("forget everything")) {
     }
 
     // SAYING GOODBYE
-    else if(userMessage.includes("bye") || userMessage.includes("goodbye")) {
-        return "Goodbye! Have a wonderful day.";
-    }
+    // GOODBYE
+else if(/\b(bye|goodbye|see you|see you later)\b/.test(userMessage)) {
+    return "Goodbye! Have a wonderful day.";
+}
 
-    // THANKING THE BOT
-    else if(userMessage.includes("thank you") || userMessage.includes("thanks")) {
-        return "You're welcome! Happy to help.";
-    }
+    // THANK YOU
+else if(/\b(thanks|thank you|thank you so much)\b/.test(userMessage)) {
+    return "You're welcome! Happy to help.";
+}
+
+
+ 
 
     // UNKNOWN MESSAGE
     else {
