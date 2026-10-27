@@ -91,6 +91,26 @@ function showTypingIndicator() {
 
 // GENERATE CHATBOT RESPONSE
 
+// CHATBOT RESPONSES
+
+const botResponses = {
+
+    greeting: "Hello! Welcome to Messenger AI. How can I help you?",
+
+    identity: "I am Messenger AI, a chatbot created by Benny!",
+
+    creator: "I was created by Benny, a Tech Guy.",
+
+    wellbeing: "I'm doing great! Thanks for asking. How about you?",
+
+    goodbye: "Goodbye! Have a wonderful day.",
+
+    thanks: "You're welcome! Happy to help.",
+
+    abilities: "I can chat with you, remember your information, and help answer basic questions!"
+
+};
+
 function chatbotResponse(userMessage) {
 
     // CONVERT MESSAGE TO LOWERCASE
@@ -241,35 +261,29 @@ else if(userMessage.includes("forget everything")) {
 }
 
     // GREETINGS
-    // GREETINGS
-if(/\b(hello|hi|hey|good morning|good afternoon|good evening)\b/.test(userMessage)) {
-    return "Hello! Welcome to Messenger AI. How can I help you?";
+    if(/\b(hello|hi|hey|good morning|good afternoon|good evening)\b/.test(userMessage)) {
+    return botResponses.greeting;
 }
 
-    // ASKING ABOUT THE BOT
-    else if(userMessage.includes("who are you")) {
-        return "I am Messenger AI, a chatbot created by Benny!";
-    }
-
     // ASKING ABOUT THE CREATOR
-    else if(userMessage.includes("who created you") || userMessage.includes("your creator")) {
-        return "I was created by Benny, a Tech Guy.";
-    }
+    else if(userMessage.includes("who are you")) {
+    return botResponses.identity;
+}
 
     // ASKING HOW THE BOT IS
     else if(userMessage.includes("how are you")) {
-        return "I'm doing great! Thanks for asking. How about you?";
+        return botResponses.wellbeing;
     }
 
     // SAYING GOODBYE
     // GOODBYE
 else if(/\b(bye|goodbye|see you|see you later)\b/.test(userMessage)) {
-    return "Goodbye! Have a wonderful day.";
+    return botResponses.goodbye;
 }
 
     // THANK YOU
 else if(/\b(thanks|thank you|thank you so much)\b/.test(userMessage)) {
-    return "You're welcome! Happy to help.";
+    return botResponses.thanks;
 }
 
 
