@@ -269,6 +269,15 @@ else if(userMessage.includes("forget everything")) {
 
 }
 
+// ASKING FOR THE TIME
+else if(/\b(what time is it|tell me the time|current time)\b/.test(userMessage)) {
+
+    const currentTime = new Date().toLocaleTimeString();
+
+    return `The current time is ${currentTime}.`;
+
+}
+
  // GREETINGS
 if(/\b(hello|hi|hey|good morning|good afternoon|good evening)\b/.test(userMessage)) {
 
