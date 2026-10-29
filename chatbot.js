@@ -91,6 +91,15 @@ function showTypingIndicator() {
 
 // GENERATE CHATBOT RESPONSE
 
+// RANDOM GREETING RESPONSES
+
+const greetingResponses = [
+    "Hello! How can I help you?",
+    "Hey there! Welcome to Messenger AI.",
+    "Hi! It's nice to chat with you.",
+    "Hello! How is your day going?"
+];
+
 // CHATBOT RESPONSES
 
 const botResponses = {
@@ -260,9 +269,13 @@ else if(userMessage.includes("forget everything")) {
 
 }
 
-    // GREETINGS
-    if(/\b(hello|hi|hey|good morning|good afternoon|good evening)\b/.test(userMessage)) {
-    return botResponses.greeting;
+ // GREETINGS
+if(/\b(hello|hi|hey|good morning|good afternoon|good evening)\b/.test(userMessage)) {
+
+    const randomIndex = Math.floor(Math.random() * greetingResponses.length);
+
+    return greetingResponses[randomIndex];
+
 }
 
     // ASKING ABOUT THE CREATOR
