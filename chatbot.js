@@ -91,6 +91,36 @@ function showTypingIndicator() {
 
 // GENERATE CHATBOT RESPONSE
 
+// BASIC CALCULATOR
+function calculate(firstNumber, operator, secondNumber) {
+
+    if(operator === "+") {
+        return firstNumber + secondNumber;
+    }
+
+    else if(operator === "-") {
+        return firstNumber - secondNumber;
+    }
+
+    else if(operator === "*") {
+        return firstNumber * secondNumber;
+    }
+
+    else if(operator === "/") {
+
+        if(secondNumber === 0) {
+            return "Cannot divide by zero!";
+        }
+
+        return firstNumber / secondNumber;
+    }
+
+    else {
+        return "Invalid operator!";
+    }
+
+}
+
 // RANDOM GREETING RESPONSES
 
 const greetingResponses = [
