@@ -91,6 +91,34 @@ function showTypingIndicator() {
 
 // GENERATE CHATBOT RESPONSE
 
+// HANDLE CALCULATOR MESSAGES
+
+function handleCalculation(userMessage) {
+
+    // EXTRACT NUMBERS
+    const numbers = userMessage.match(/\d+(\.\d+)?/g);
+
+    // EXTRACT OPERATOR
+    const operatorMatch = userMessage.match(/[+\-*/%]/);
+
+    // CHECK WHETHER NUMBERS AND OPERATOR EXIST
+    if(!numbers || numbers.length !== 2 || !operatorMatch) {
+        return "Please provide two numbers and a mathematical operator.";
+    }
+
+    // CONVERT STRINGS INTO NUMBERS
+    const firstNumber = Number(numbers[0]);
+    const secondNumber = Number(numbers[1]);
+
+    // GET THE OPERATOR
+    const operator = operatorMatch[0];
+
+    // PERFORM CALCULATION
+    const result = calculate(firstNumber, operator, secondNumber);
+
+    return `The answer is ${result}.`;
+}
+
 // BASIC CALCULATOR
 function calculate(firstNumber, operator, secondNumber) {
 
