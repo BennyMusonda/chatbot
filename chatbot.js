@@ -91,6 +91,36 @@ function showTypingIndicator() {
 
 // GENERATE CHATBOT RESPONSE
 
+// CONVERT MATHEMATICAL WORDS INTO SYMBOLS
+
+function convertOperator(userMessage) {
+
+    if(/\b(plus|add|added to)\b/.test(userMessage)) {
+        return "+";
+    }
+
+    else if(/\b(minus|subtract|take away)\b/.test(userMessage)) {
+        return "-";
+    }
+
+    else if(/\b(times|multiplied by|multiply)\b/.test(userMessage)) {
+        return "*";
+    }
+
+    else if(/\b(divided by|divide)\b/.test(userMessage)) {
+        return "/";
+    }
+
+    else if(/\b(remainder|modulo)\b/.test(userMessage)) {
+        return "%";
+    }
+
+    else {
+        return null;
+    }
+
+}
+
 // HANDLE CALCULATOR MESSAGES
 
 function handleCalculation(userMessage) {
@@ -101,17 +131,18 @@ function handleCalculation(userMessage) {
     // EXTRACT OPERATOR
     const operatorMatch = userMessage.match(/[+\-*/%]/);
 
+const operator = operatorMatch
+    ? operatorMatch[0]
+    : convertOperator(userMessage);
+
     // CHECK WHETHER NUMBERS AND OPERATOR EXIST
-    if(!numbers || numbers.length !== 2 || !operatorMatch) {
+    if(!numbers || numbers.length !== 2 || !operator) {
         return "Please provide two numbers and a mathematical operator.";
     }
 
     // CONVERT STRINGS INTO NUMBERS
     const firstNumber = Number(numbers[0]);
     const secondNumber = Number(numbers[1]);
-
-    // GET THE OPERATOR
-    const operator = operatorMatch[0];
 
     // PERFORM CALCULATION
     const result = calculate(firstNumber, operator, secondNumber);
