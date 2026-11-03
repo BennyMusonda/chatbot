@@ -29,6 +29,7 @@ main {
     overflow: hidden;
     background-color: black;
     border-radius: 40px;
+    overflow-y: auto;
 }
 
 /* Chat title typography and alignment. */
@@ -43,6 +44,21 @@ main {
 /* Highlight inline spans with the accent color. */
 span {
     color: yellowgreen;
+}
+
+/* Chat Headings*/
+.chat-heading{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    border-bottom: none;
 }
 
 /* CHAT CONVERSATION AREA */
