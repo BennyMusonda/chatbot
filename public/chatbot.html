@@ -1,42 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <!-- Document metadata. -->
+
+    <!-- DOCUMENT INFORMATION -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chat bot</title>
 
-    <!-- Stylesheets for the chatbot and its icons. -->
+    <title>Messenger AI</title>
+
+    <!-- CONNECT CSS -->
+
     <link rel="stylesheet" href="chatbot.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
 </head>
+
 <body>
-    <!-- Main chatbot page content. -->
+
+    <!-- MAIN CHATBOT WINDOW -->
+
     <main>
-        <div class="main-content">
-           <!-- CHAT HEADER -->
-<div class="chat-heading">
-    <div class="main-title">messenger <span>Ai</span></div>
 
-    <button id="clearChatBtn">Clear Chat</button>
-</div>
+        <!-- CHATBOT HEADER -->
 
-            <!-- Chat conversation area. -->
-            <div class="chat-container" id="chatContainer">
-                <!-- Message input field and send control. -->
-                <div class="input-field">
-                    <input type="text" id="textField" placeholder="Type a message...">
+        <div class="chat-heading">
 
-                    <!-- Send button with a play icon. -->
-                    <div class="send-btn" id="sendBtn">
-                        <a href="#"><i class="fa-solid fa-play"></i></a>
-                    </div>
-                </div>
+            <div class="main-title">
+                messenger <span>Ai</span>
             </div>
+
+            <button id="clearChatBtn">
+                Clear Chat
+            </button>
+
         </div>
+
+
+        <!-- CONNECTION STATUS -->
+
+        <div class="connection-status" id="connectionStatus">
+
+            <span class="status-indicator"></span>
+
+            <span id="statusText">Checking connection...</span>
+
+        </div>
+
+
+        <!-- CHAT CONVERSATION AREA -->
+
+        <div class="chat-container" id="chatContainer">
+
+            <!-- WELCOME MESSAGE -->
+
+            <div class="message-row bot">
+
+                <img
+                    src="imgs/PXL_20260828_133354894~2.jpg"
+                    alt="Messenger AI"
+                >
+
+                <div class="message-bubble">
+
+                    Hello! I'm Messenger AI.
+
+                    <br><br>
+
+                    I'm here to chat, answer questions and help you learn.
+
+                    <br><br>
+
+                    What would you like to talk about?
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGE INPUT AREA -->
+
+        <div class="input-field">
+
+            <input
+                type="text"
+                id="textField"
+                placeholder="Type a message..."
+                autocomplete="off"
+            >
+
+            <button class="send-btn" id="sendBtn" type="button">
+
+                ➤
+
+            </button>
+
+        </div>
+
     </main>
 
-    <!-- Load chatbot behavior after the HTML is parsed. -->
-    <script src="chatbot.js" defer></script>
+
+    <!-- LOAD OFFLINE KNOWLEDGE FIRST -->
+
+    <script src="knowledge/knowledge.js"></script>
+
+
+    <!-- LOAD CHATBOT FUNCTIONALITY -->
+
+    <script src="chatbot.js"></script>
+
+
 </body>
+
 </html>

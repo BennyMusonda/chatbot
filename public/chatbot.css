@@ -1,222 +1,465 @@
-/* Reset default spacing and make dimensions include padding and borders. */
+/* =====================================
+
+GENERAL RESET
+===================================== */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
-/* Center the chat window in the page and set the page colors. */
+/* =====================================
+2. PAGE BACKGROUND
+===================================== */
+
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: white;
-    color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background-color: white;
+color: white;
+font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Main chat window: define its layout, size, clipping, and appearance. */
+/* =====================================
+3. MAIN CHATBOT WINDOW
+===================================== */
+
 main {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 35rem;
-    height: calc(100vh - 40px);
-    min-height: calc(100vh - 40px);
-    margin: 20px;
-    overflow: hidden;
-    background-color: black;
-    border-radius: 40px;
-    overflow-y: auto;
+position: relative;
+display: flex;
+flex-direction: column;
+
+width: 100%;
+max-width: 35rem;
+
+height: calc(100vh - 40px);
+min-height: 400px;
+
+margin: 20px;
+
+overflow: hidden;
+
+background-color: black;
+
+border-radius: 40px;
+
 }
 
-/* Chat title typography and alignment. */
+/* =====================================
+4. CHAT HEADER
+===================================== */
+
+.chat-heading {
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+width: 100%;
+
+padding: 15px 20px;
+
+background-color: black;
+
+flex-shrink: 0;
+
+}
+
+/* CHATBOT TITLE */
+
 .main-title {
-    margin: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    text-align: center;
+font-size: 20px;
+font-weight: 800;
+text-align: center;
 }
 
-/* Highlight inline spans with the accent color. */
-span {
-    color: yellowgreen;
+/* ACCENT COLOUR */
+
+.main-title span {
+color: yellowgreen;
 }
 
-/* Chat Headings*/
-.chat-heading{
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    left: 0;
-    width: 100%;
-    background-color: transparent;
-    border-bottom: none;
+/* CLEAR CHAT BUTTON */
+
+#clearChatBtn {
+padding: 8px 12px;
+
+color: white;
+background-color: purple;
+
+border: none;
+border-radius: 8px;
+
+cursor: pointer;
+
+transition: 0.3s;
+
 }
 
-/* CHAT CONVERSATION AREA */
+#clearChatBtn {
+background-color: yellowgreen;
+color: black;
+}
 
-/* Conversation area: stack messages, add spacing, and enable scrolling. */
+/* =====================================
+5. CONNECTION STATUS
+===================================== */
+
+.connection-status {
+display: flex;
+align-items: center;
+
+gap: 8px;
+
+padding: 0 20px 12px;
+
+color: grey;
+
+font-size: 12px;
+
+flex-shrink: 0;
+
+}
+
+/* STATUS INDICATOR */
+
+.status-indicator {
+width: 8px;
+height: 8px;
+
+background-color: grey;
+
+border-radius: 50%;
+
+}
+
+/* ONLINE STATUS */
+
+.connection-status.online .status-indicator {
+background-color: yellowgreen;
+}
+
+/* OFFLINE STATUS */
+
+.connection-status.offline .status-indicator {
+background-color: red;
+}
+
+/* =====================================
+6. CHAT CONVERSATION AREA
+===================================== */
+
 .chat-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: 15px;
-    padding: 20px;
-    overflow-y: auto;
-    margin-bottom: 80px;
+display: flex;
+flex-direction: column;
+
+flex: 1;
+
+gap: 15px;
+
+padding: 20px;
+
+overflow-y: auto;
+
+scroll-behavior: smooth;
+
 }
 
-/* MESSAGE ROW */
+/* CUSTOM SCROLLBAR */
 
-/* Shared layout for each message and its profile image. */
+.chat-container::-webkit-scrollbar {
+width: 5px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+background-color: purple;
+border-radius: 10px;
+}
+
+/* =====================================
+7. MESSAGE ROW
+===================================== */
+
 .message-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    max-width: 85%;
+display: flex;
+align-items: flex-start;
+
+gap: 10px;
+
+max-width: 90%;
+
 }
 
 /* USER MESSAGE */
 
-/* Outgoing messages align right and reverse avatar/bubble order. */
 .message-row.user {
-    align-self: flex-end;
-    flex-direction: row-reverse;
+align-self: flex-end;
+
+flex-direction: row-reverse;
+
 }
 
 /* BOT MESSAGE */
 
-/* Incoming messages align to the left. */
 .message-row.bot {
-    align-self: flex-start;
+align-self: flex-start;
 }
 
-/* MESSAGE BUBBLE */
+/* =====================================
+8. MESSAGE BUBBLES
+===================================== */
 
-/* Shared message bubble spacing, shape, typography, and text wrapping. */
 .message-bubble {
-    padding: 12px 16px;
-    border-radius: 15px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    overflow-wrap: anywhere;
+padding: 12px 16px;
+
+border-radius: 15px;
+
+font-size: 14px;
+line-height: 1.6;
+
+overflow-wrap: anywhere;
+
 }
 
 /* USER BUBBLE */
 
-/* Outgoing bubble colors. */
 .user .message-bubble {
-    background-color: yellowgreen;
-    color: purple;
+background-color: yellowgreen;
+color: purple;
 }
 
 /* BOT BUBBLE */
 
-/* Incoming bubble colors. */
 .bot .message-bubble {
-    background-color: purple;
-    color: white;
+background-color: purple;
+color: white;
 }
 
-/* PROFILE IMAGES */
+/* =====================================
+9. PROFILE IMAGES
+===================================== */
 
-/* Keep profile images consistently sized and circular. */
 .message-row img {
-    width: 35px;
-    height: 35px;
-    object-fit: cover;
-    border-radius: 50%;
+width: 35px;
+height: 35px;
+
+object-fit: cover;
+
+border-radius: 50%;
+
+flex-shrink: 0;
+
 }
 
-/* INPUT FIELD */
-/* Anchor the composer at the bottom of the chat window. */
-.input-field {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    margin-top: auto;
-}
-
-/* Text input styling, with space reserved for the send control. */
-.input-field input {
-    width: 100%;
-    height: 3rem;
-    padding-left: 20px;
-    padding-right: 3.5rem;
-    color: white;
-    font-weight: 500;
-    background-color: yellowgreen;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-}
-
-/* Placeholder text color. */
-.input-field input::placeholder {
-    color: grey;
-}
-
-/* Position and style the send control within the composer. */
-.send-btn a {
-    position: absolute;
-    top: 50%;
-    right: 2rem;
-    color: purple;
-    font-size: 1.8rem;
-    transform: translateY(-50%);
-}
-
-/* Typing Indicator */
-.typing-indicator {
-    padding: 12px 16px;
-    margin-left: 45px;
-    color: yellowgreen;
-    font-size: 13px;
-    font-style: italic;
-}
-
-/* MESSAGE TIMESTAMPS */
+/* =====================================
+10. MESSAGE TIMESTAMPS
+===================================== */
 
 .message-time {
-    display: block;
-    margin-top: 6px;
-    font-size: 10px;
-    opacity: 0.65;
-    text-align: right;
+display: block;
+
+margin-top: 6px;
+
+font-size: 10px;
+
+opacity: 0.65;
+
+text-align: right;
+
 }
 
-/* CHAT HEADER */
+/* =====================================
+11. TYPING INDICATOR
+===================================== */
+
+.typing-indicator {
+display: flex;
+align-items: center;
+
+gap: 5px;
+
+margin-left: 45px;
+
+color: yellowgreen;
+
+font-size: 13px;
+font-style: italic;
+
+}
+
+/* ANIMATED DOTS */
+
+.typing-indicator span {
+width: 6px;
+height: 6px;
+
+background-color: yellowgreen;
+
+border-radius: 50%;
+
+animation: typing 1s infinite;
+
+}
+
+.typing-indicator span:nth-child(2) {
+animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+animation-delay: 0.4s;
+}
+
+/* TYPING ANIMATION */
+
+@keyframes typing {
+
+0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+}
+
+30% {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+}
+
+/* =====================================
+12. INPUT AREA
+===================================== */
+
+.input-field {
+position: relative;
+
+display: flex;
+align-items: center;
+
+width: 100%;
+
+padding: 20px;
+
+background-color: black;
+
+flex-shrink: 0;
+
+}
+
+/* INPUT BOX */
+
+.input-field input {
+width: 100%;
+height: 3rem;
+
+padding: 0 55px 0 20px;
+
+color: white;
+
+font-size: 14px;
+font-weight: 500;
+
+background-color: yellowgreen;
+
+border: none;
+border-radius: 20px;
+
+outline: none;
+
+}
+
+/* PLACEHOLDER */
+
+.input-field input::placeholder {
+color: #555;
+}
+
+/* INPUT FOCUS */
+
+.input-field input {
+outline: 2px solid purple;
+}
+
+/* =====================================
+13. SEND BUTTON
+===================================== */
+
+.send-btn {
+position: absolute;
+
+right: 32px;
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+width: 38px;
+height: 38px;
+
+color: purple;
+
+font-size: 22px;
+font-weight: bold;
+
+background-color: transparent;
+
+border: none;
+
+cursor: pointer;
+
+transition: 0.3s;
+
+}
+
+.send-btn {
+color: black;
+transform: scale(1.1);
+}
+
+/* =====================================
+14. DISABLED SEND BUTTON
+===================================== */
+
+.send-btn {
+opacity: 0.5;
+cursor: not-allowed;
+}
+
+/* =====================================
+15. RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 600px) {
+
+body {
+    background-color: black;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+
+    margin: 0;
+
+    border-radius: 0;
+}
+
 .chat-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+    padding: 15px;
 }
 
-/* CLEAR CHAT BUTTON */
-#clearChatBtn {
-    padding: 8px 12px;
-    color: white;
-    background-color: purple;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+.chat-container {
+    padding: 15px;
 }
 
-#clearChatBtn:hover {
-    background-color: yellowgreen;
-    color: black;
+.input-field {
+    padding: 15px;
+}
+
+.send-btn {
+    right: 27px;
+}
+
 }
