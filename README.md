@@ -15,13 +15,25 @@ Features
 
 Project Structure
 
-text
-your-project-folder/
+MESSENGER-AI/
 │
-├── index.html     # Main HTML structure containing the chat container and input form
-├── style.css      # CSS styles for layout, colors, animations, and responsiveness
-└── script.js      # JavaScript logic for handling user input and bot replies
-Use code with caution.
+├── public/
+│   │
+│   ├── index.html
+│   ├── chatbot.css
+│   ├── chatbot.js
+│   │
+│   ├── knowledge/
+│   │   └── knowledge.js
+│   │
+│   └── imgs/
+│       ├── benny 1.jpg.jpeg
+│       └── bot.jpg
+│
+├── server.js
+├── .env
+├── .gitignore
+└── package.json
 
 Getting Started
 
