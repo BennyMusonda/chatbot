@@ -85,7 +85,7 @@ Your name is Messenger AI.
 
 app.get("/", (req, res) => {
 
-    res.sendFile("index.html", {
+    res.sendFile("chatbot.html", {
         root: "public"
     });
 
