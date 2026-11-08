@@ -3,17 +3,13 @@
 // BACKEND SERVER
 // ======================================================
 
-
 // ======================================================
 // 1. IMPORT REQUIRED PACKAGES
 // ======================================================
 
 import express from "express";
-
 import dotenv from "dotenv";
-
 import { GoogleGenAI } from "@google/genai";
-
 
 // ======================================================
 // 2. LOAD ENVIRONMENT VARIABLES
@@ -21,37 +17,27 @@ import { GoogleGenAI } from "@google/genai";
 
 dotenv.config();
 
-
 // ======================================================
 // 3. CREATE EXPRESS APPLICATION
 // ======================================================
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
-
 
 // ======================================================
 // 4. CONFIGURE MIDDLEWARE
 // ======================================================
 
 app.use(express.json({ limit: "20kb" }));
-
 app.use(express.static("public"));
-
 
 // ======================================================
 // 5. INITIALIZE GEMINI
 // ======================================================
 
 const apiKey = process.env.GEMINI_API_KEY;
-
-const ai = apiKey
-    ? new GoogleGenAI({ apiKey })
-    : null;
-
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 const MODEL = process.env.GEMINI_MODEL || "gemini-3.8-flash";
-
 
 // ======================================================
 // 6. CHATBOT PERSONALITY
@@ -78,256 +64,140 @@ Your name is Messenger AI.
 
 `;
 
-
 // ======================================================
 // 7. HOME ROUTE
 // ======================================================
 
 app.get("/", (req, res) => {
-
     res.sendFile("chatbot.html", {
         root: "public"
     });
-
 });
-
 
 // ======================================================
 // 8. CHECK AI CONNECTION
 // ======================================================
 
 app.get("/api/status", (req, res) => {
-
     res.json({
-
         server: "online",
-
         aiAvailable: Boolean(ai),
-
         model: MODEL
-
     });
-
 });
-
 
 // ======================================================
 // 9. CHAT API ROUTE
 // ======================================================
 
 app.post("/api/chat", async (req, res) => {
-
     try {
-
-        // CHECK API CONFIGURATION
-
         if (!ai) {
-
             return res.status(503).json({
-
                 error: "Gemini API is not configured."
-
             });
-
         }
 
-
-        // GET USER MESSAGE AND CHAT HISTORY
-
         const { message, history = [] } = req.body;
-
-
-        // VALIDATE USER MESSAGE
 
         if (
             typeof message !== "string" ||
             message.trim() === ""
         ) {
-
             return res.status(400).json({
-
                 error: "Please provide a valid message."
-
             });
-
         }
-
 
         if (message.length > 4000) {
-
             return res.status(400).json({
-
                 error: "Your message is too long."
-
             });
-
         }
-
-
-        // VALIDATE CHAT HISTORY
 
         if (!Array.isArray(history)) {
-
             return res.status(400).json({
-
                 error: "Invalid conversation history."
-
             });
-
         }
 
-
-        // KEEP ONLY VALID RECENT MESSAGES
-
         const recentHistory = history
-
             .filter(chat =>
-
                 chat &&
-
                 ["user", "bot"].includes(chat.sender) &&
-
                 typeof chat.message === "string"
-
             )
-
             .slice(-10);
 
-
-        // REMOVE THE CURRENT USER MESSAGE FROM HISTORY
-        // IT WILL BE SENT SEPARATELY BELOW.
-
         if (recentHistory.length > 0) {
-
             const lastMessage = recentHistory[recentHistory.length - 1];
 
             if (
                 lastMessage.sender === "user" &&
                 lastMessage.message === message
             ) {
-
                 recentHistory.pop();
-
             }
-
         }
 
-
-        // CONVERT HISTORY INTO GEMINI FORMAT
-
         const conversation = recentHistory.map(chat => ({
-
             role: chat.sender === "bot" ? "model" : "user",
-
             parts: [
-
                 {
                     text: chat.message
                 }
-
             ]
-
         }));
 
-
-        // ADD CURRENT USER MESSAGE
-
         conversation.push({
-
             role: "user",
-
             parts: [
-
                 {
                     text: message
                 }
-
             ]
-
         });
-
-
-        // SEND REQUEST TO GEMINI
 
         const response = await ai.models.generateContent({
-
             model: MODEL,
-
             contents: conversation,
-
             config: {
-
                 systemInstruction: systemInstructions,
-
                 temperature: 0.7,
-
                 maxOutputTokens: 1000
-
             }
-
         });
-
-
-        // GET GENERATED RESPONSE
 
         const aiReply = response.text;
 
-
-        // CHECK RESPONSE
-
         if (!aiReply || !aiReply.trim()) {
-
             return res.status(502).json({
-
                 error: "Gemini did not return a response."
-
             });
-
         }
 
-
-        // SEND RESPONSE TO FRONTEND
-
         res.json({
-
             reply: aiReply
-
         });
-
-
     } catch (error) {
-
         console.error("Gemini API error:", error.message);
 
         res.status(500).json({
-
             error: "Messenger AI could not generate a response. Please try again."
-
         });
-
     }
-
 });
-
 
 // ======================================================
 // 10. START SERVER
 // ======================================================
 
 app.listen(PORT, () => {
-
     console.log("----------------------------------");
-
     console.log("MESSENGER AI SERVER");
-
     console.log("----------------------------------");
-
     console.log(`Server: http://localhost:${PORT}`);
-
     console.log(`Gemini configured: ${Boolean(ai)}`);
-
     console.log(`Model: ${MODEL}`);
-
     console.log("----------------------------------");
-
 });

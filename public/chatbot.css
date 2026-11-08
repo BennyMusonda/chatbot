@@ -1,5 +1,5 @@
 /* =========================================
-   BASE + RESET
+   1. BASE + RESET
 ========================================= */
 
 :root {
@@ -52,7 +52,7 @@ button {
 }
 
 /* =========================================
-   CHAT SHELL
+   2. MAIN CHATBOT WINDOW
 ========================================= */
 
 main {
@@ -84,9 +84,190 @@ main {
         0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+/* =========================================
+   3. MESSENGER AI SPLASH SCREEN
+========================================= */
+
+.splash-screen {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    background: var(--ios-blue);
+
+    color: var(--white);
+
+    border-radius: inherit;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+.splash-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    animation: splashEntrance 1s ease forwards;
+}
+
+.splash-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 115px;
+    height: 115px;
+
+    margin-bottom: 24px;
+
+    animation: logoFloat 2.5s ease-in-out infinite;
+}
+
+.splash-logo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 25px;
+
+    filter: drop-shadow(
+        0 12px 20px rgba(0, 0, 0, 0.15)
+    );
+}
+
+.splash-content h1 {
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    color: var(--white);
+}
+
+.splash-content h1 span {
+    color: #dceeff;
+}
+
+.splash-content p {
+    margin-top: 10px;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: 13px;
+    font-weight: 400;
+
+    letter-spacing: 0.5px;
+}
+
+.splash-loader {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 35px;
+}
+
+.splash-loader span {
+    width: 7px;
+    height: 7px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    animation: splashLoading 1.2s infinite ease-in-out;
+}
+
+.splash-loader span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.splash-loader span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.splash-footer {
+    position: absolute;
+
+    bottom: 30px;
+
+    width: 100%;
+
+    text-align: center;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 11px;
+
+    letter-spacing: 0.5px;
+}
+
+@keyframes splashEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes splashLoading {
+    0%, 80%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
 
 /* =========================================
-   HEADER
+   4. CHAT HEADER
 ========================================= */
 
 .chat-heading {
@@ -96,7 +277,7 @@ main {
 
     width: 100%;
 
-    padding: 10px 15px 14px;
+    padding: 15px 18px;
 
     background: rgba(255, 255, 255, 0.98);
 
@@ -105,41 +286,38 @@ main {
     flex-shrink: 0;
 }
 
+.main-title a {
+    font-family: "Momo Trust Display", sans-serif;
+    text-decoration: none;
+    font-size: 19px;
+    font-weight: 400;
 
-
-.online-indicator {
-    position: absolute;
-
-    right: 0;
-    bottom: 0;
-
-    width: 11px;
-    height: 11px;
-
-    background: var(--ios-green);
-
-    border: 2px solid white;
-    border-radius: 50%;
+    color: var(--ios-blue);
 }
 
+.main-title span {
+    color: var(--ios-blue-dark);
+}
 
 #clearChatBtn {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
 
     border: none;
     border-radius: 50%;
 
     background: #f2f2f7;
+
     color: var(--ios-blue);
 
     font-size: 13px;
 
     cursor: pointer;
+
     transition: 0.2s;
 }
 
@@ -149,7 +327,7 @@ main {
 }
 
 /* =========================================
-   CONNECTION
+   5. CONNECTION STATUS
 ========================================= */
 
 .connection-status {
@@ -162,6 +340,7 @@ main {
     padding: 9px;
 
     background: var(--white);
+
     color: var(--ios-text-gray);
 
     font-size: 10px;
@@ -175,6 +354,7 @@ main {
     height: 7px;
 
     background: var(--ios-text-gray);
+
     border-radius: 50%;
 }
 
@@ -187,14 +367,8 @@ main {
 }
 
 /* =========================================
-   CHAT AREA
+   6. CHAT CONVERSATION AREA
 ========================================= */
-.main-title{
-  font-family: "Momo Trust Display", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  color: var(--ios-blue)
-}
 
 .chat-container {
     display: flex;
@@ -208,6 +382,7 @@ main {
     padding: 22px 15px;
 
     overflow-y: auto;
+
     background: #ffffff;
 
     scroll-behavior: smooth;
@@ -235,11 +410,12 @@ main {
 
     font-size: 10px;
     font-weight: 600;
+
     letter-spacing: 0.3px;
 }
 
 /* =========================================
-   MESSAGES
+   7. MESSAGE ROWS
 ========================================= */
 
 .message-row {
@@ -257,6 +433,7 @@ main {
 
 .message-row.user {
     align-self: flex-end;
+
     flex-direction: row-reverse;
 }
 
@@ -276,6 +453,10 @@ main {
     }
 }
 
+/* =========================================
+   8. MESSAGE BUBBLES
+========================================= */
+
 .message-bubble {
     position: relative;
 
@@ -292,6 +473,7 @@ main {
 
 .user .message-bubble {
     background: var(--ios-blue);
+
     color: var(--white);
 
     border-bottom-right-radius: 5px;
@@ -299,14 +481,23 @@ main {
 
 .bot .message-bubble {
     background: var(--ios-gray);
+
     color: #1c1c1e;
 
     border-bottom-left-radius: 5px;
 }
 
+/* =========================================
+   9. PROFILE IMAGES
+========================================= */
+
 .message-row img {
     display: none;
 }
+
+/* =========================================
+   10. MESSAGE TIMESTAMPS
+========================================= */
 
 .message-time {
     display: block;
@@ -314,10 +505,15 @@ main {
     margin-top: 6px;
 
     font-size: 9px;
+
     opacity: 0.65;
 
     text-align: right;
 }
+
+/* =========================================
+   11. TAPBACK REACTIONS
+========================================= */
 
 .tapback-reaction {
     position: absolute;
@@ -335,6 +531,7 @@ main {
     background: var(--ios-gray);
 
     border: 2px solid white;
+
     border-radius: 20px;
 
     color: #ff2d55;
@@ -345,7 +542,7 @@ main {
 }
 
 /* =========================================
-   TYPING
+   12. TYPING INDICATOR
 ========================================= */
 
 .typing-indicator {
@@ -357,6 +554,7 @@ main {
     margin-left: 5px;
 
     color: var(--ios-text-gray);
+
     font-size: 11px;
 }
 
@@ -365,6 +563,7 @@ main {
     height: 6px;
 
     background: #a1a1a6;
+
     border-radius: 50%;
 
     animation: typing 1s infinite;
@@ -391,7 +590,7 @@ main {
 }
 
 /* =========================================
-   INPUT
+   13. INPUT AREA
 ========================================= */
 
 .input-field {
@@ -411,55 +610,20 @@ main {
     flex-shrink: 0;
 }
 
-.add-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 34px;
-    height: 34px;
-
-    flex-shrink: 0;
-
-    border: none;
-    border-radius: 50%;
-
-    background: #f0f0f5;
-    color: #636366;
-
-    font-size: 15px;
-
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.add-button:hover {
-    background: #e5e5ea;
-    transform: scale(1.05);
-}
-
-.input-wrapper {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-
-    flex: 1;
-    min-width: 0;
-}
-
 .input-field input {
     width: 100%;
     height: 39px;
 
-    padding: 0 42px 0 15px;
+    padding: 0 15px;
 
     border: 1px solid #d1d1d6;
+
     border-radius: 25px;
 
     outline: none;
 
     background: white;
+
     color: #1c1c1e;
 
     font-size: 14px;
@@ -473,57 +637,42 @@ main {
 
 .input-field input:focus {
     border-color: var(--ios-blue);
+
     box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.08);
 }
 
-.microphone-button {
-    position: absolute;
-
-    right: 12px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: none;
-    background: transparent;
-
-    color: #8e8e93;
-
-    font-size: 14px;
-
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.microphone-button:hover {
-    color: var(--ios-blue);
-}
+/* =========================================
+   14. SEND BUTTON
+========================================= */
 
 .send-btn {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
 
     flex-shrink: 0;
 
     border: none;
+
     border-radius: 50%;
 
     background: var(--ios-blue);
+
     color: white;
 
     font-size: 14px;
 
     cursor: pointer;
+
     transition: 0.2s;
 }
 
 .send-btn:hover {
     background: var(--ios-blue-dark);
+
     transform: scale(1.06);
 }
 
@@ -533,37 +682,14 @@ main {
 
 .send-btn:disabled {
     opacity: 0.4;
+
     cursor: not-allowed;
+
     transform: none;
 }
 
 /* =========================================
-   HOME INDICATOR
-========================================= */
-
-.home-indicator-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 25px;
-    min-height: 25px;
-
-    background: white;
-
-    flex-shrink: 0;
-}
-
-.home-indicator {
-    width: 105px;
-    height: 5px;
-
-    background: #000;
-    border-radius: 10px;
-}
-
-/* =========================================
-   RESPONSIVE
+   15. RESPONSIVE DESIGN
 ========================================= */
 
 @media (max-width: 600px) {
@@ -585,18 +711,14 @@ main {
         margin: 0;
 
         border: none;
+
         border-radius: 0;
 
         box-shadow: none;
     }
 
-    .ios-status-bar {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-
     .chat-heading {
-        padding: 8px 12px 12px;
+        padding: 13px 15px;
     }
 
     .chat-container {
@@ -614,35 +736,58 @@ main {
     .input-field {
         padding: 10px 12px;
     }
+
+    .splash-screen {
+        border-radius: 0;
+    }
+
+    .splash-logo {
+        width: 105px;
+        height: 105px;
+    }
+
+    .splash-content h1 {
+        font-size: 25px;
+    }
 }
 
+/* =========================================
+   16. SMALL SCREEN ADJUSTMENTS
+========================================= */
+
 @media (max-width: 360px) {
-    .contact-avatar-wrapper {
-        width: 34px;
-        height: 34px;
-    }
-
-    .contact-name {
-        font-size: 12px;
-    }
-
-    .header-actions {
-        gap: 5px;
-    }
-
-    #clearChatBtn {
-        width: 29px;
-        height: 29px;
-        font-size: 11px;
-    }
-
-    .video-button {
-        width: 31px;
-        height: 31px;
+    .main-title {
+        font-size: 17px;
     }
 
     .chat-heading {
-        padding-left: 8px;
-        padding-right: 8px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .splash-logo {
+        width: 95px;
+        height: 95px;
+    }
+
+    .splash-content h1 {
+        font-size: 23px;
+    }
+}
+
+/* =========================================
+   17. REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .splash-content,
+    .splash-logo,
+    .splash-loader span,
+    .message-row {
+        animation: none;
+    }
+
+    .splash-screen {
+        transition: opacity 0.3s ease;
     }
 }

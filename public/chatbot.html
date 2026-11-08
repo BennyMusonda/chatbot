@@ -1,116 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <!-- DOCUMENT INFORMATION -->
-
+    <!-- Document metadata and external resources -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#007aff">
 
     <title>Messenger AI</title>
 
-    <!-- CONNECT CSS -->
-
     <link rel="stylesheet" href="chatbot.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Montserrat:wght@100..900&display=swap"
+        rel="stylesheet"
+    >
 </head>
-
 <body>
-
-    <!-- MAIN CHATBOT WINDOW -->
-
-    <main>
-
-        <!-- CHATBOT HEADER -->
-
-        <div class="chat-heading">
-
-            <div class="main-title">
-                messenger <span>Ai</span>
-            </div>
-
-            <button id="clearChatBtn">
-                <a><i class="fa-solid fa-trash"></i></a>
-            </button>
-
-        </div>
-
-
-        <!-- CONNECTION STATUS -->
-
-        <div class="connection-status" id="connectionStatus">
-
-            <span class="status-indicator"></span>
-
-            <span id="statusText">Checking connection...</span>
-
-        </div>
-
-
-        <!-- CHAT CONVERSATION AREA -->
-
-        <div class="chat-container" id="chatContainer">
-
-            <!-- WELCOME MESSAGE -->
-
-            <div class="message-row bot">
-
-                <div class="message-bubble">
-
-                    Hello! I'm Messenger AI.
-
-                    <br><br>
-
-                    I'm here to chat, answer questions and help you learn.
-
-                    <br><br>
-
-                    What would you like to talk about?
-
+    <main id="chatbotWindow">
+        <!-- Messenger AI splash screen -->
+        <div class="splash-screen" id="splashScreen">
+            <div class="splash-content">
+                <div class="splash-logo">
+                    <img
+                        src="/imgs/Blue Gradient Robot Chat Bubble Logo.png"
+                        alt="Messenger AI Logo"
+                    >
                 </div>
 
+                <h1>Messenger <span>AI</span></h1>
+                <p>Your intelligent companion.</p>
+
+                <div class="splash-loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
 
+            <div class="splash-footer">
+                <span>Powered by Francify Technologies</span>
+            </div>
         </div>
 
+        <!-- Chatbot header -->
+        <header class="chat-heading">
+            <div class="main-title">
+                <a href="/public/chatbot.html">messenger <span>Ai</span></a>
+            </div>
 
-        <!-- MESSAGE INPUT AREA -->
+            <button
+                id="clearChatBtn"
+                type="button"
+                title="Clear conversation"
+                aria-label="Clear conversation"
+            >
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </header>
 
+        <!-- Connection status -->
+        <div class="connection-status" id="connectionStatus">
+            <span class="status-indicator"></span>
+            <span id="statusText">Checking connection...</span>
+        </div>
+
+        <!-- Chat conversation area -->
+        <div class="chat-container" id="chatContainer">
+            <div class="message-row bot">
+                <div class="message-bubble">
+                    Hello! I'm Messenger AI.
+                    <br><br>
+                    I'm here to chat, answer questions and help you learn.
+                    <br><br>
+                    What would you like to talk about?
+                </div>
+            </div>
+        </div>
+
+        <!-- Message input area -->
         <div class="input-field">
-
             <input
                 type="text"
                 id="textField"
                 placeholder="Type a message..."
                 autocomplete="off"
+                aria-label="Type a message"
             >
 
-            <button class="send-btn" id="sendBtn" type="button">
-
-                ➤
-
+            <button
+                class="send-btn"
+                id="sendBtn"
+                type="button"
+                aria-label="Send message"
+            >
+                <i class="fa-solid fa-paper-plane"></i>
             </button>
-
         </div>
-
     </main>
 
-
-    <!-- LOAD OFFLINE KNOWLEDGE FIRST -->
-
+    <!-- Offline knowledge and chatbot functionality -->
     <script src="knowledge/knowledge.js"></script>
-
-
-    <!-- LOAD CHATBOT FUNCTIONALITY -->
-
     <script src="chatbot.js"></script>
-
-
 </body>
-
 </html>

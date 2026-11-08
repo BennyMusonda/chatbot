@@ -1,13 +1,17 @@
+<!-- Project Overview -->
 # Chatbot
 
+<!-- Live Demo -->
 ## Live Demo
 
 [Open the live chatbot demo](https://bennymusonda.github.io/chatbot/).
 
+<!-- About -->
 ## About
 
 A lightweight, responsive, and interactive frontend chatbot interface built with vanilla HTML, CSS, and JavaScript. It features a clean chat window with message bubbles, auto-scrolling, and typing indicators. The flexible script structure is ready for hardcoded responses or API integration.
 
+<!-- Features -->
 ## Features
 
 - Clean, modern chat interface inspired by popular messaging apps.
@@ -17,6 +21,7 @@ A lightweight, responsive, and interactive frontend chatbot interface built with
 - Auto-scrolling to keep the latest messages in view.
 - Customizable JavaScript for handling responses and chat logic.
 
+<!-- Project Structure -->
 ## Project Structure
 
 ```text
@@ -36,6 +41,7 @@ MESSENGER-AI/
 └── package.json
 ```
 
+<!-- Getting Started -->
 ## Getting Started
 
 1. Clone or download this repository.
