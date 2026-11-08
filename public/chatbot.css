@@ -189,6 +189,12 @@ main {
 /* =========================================
    CHAT AREA
 ========================================= */
+.main-title{
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--ios-blue)
+}
 
 .chat-container {
     display: flex;
