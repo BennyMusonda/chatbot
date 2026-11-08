@@ -84,61 +84,6 @@ main {
         0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* =========================================
-   STATUS BAR
-========================================= */
-
-.ios-status-bar {
-    position: relative;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    height: 48px;
-    min-height: 48px;
-
-    padding: 0 25px;
-
-    background: var(--white);
-
-    flex-shrink: 0;
-}
-
-.ios-time {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-}
-
-.dynamic-island {
-    position: absolute;
-
-    left: 50%;
-    top: 8px;
-
-    transform: translateX(-50%);
-
-    width: 105px;
-    height: 30px;
-
-    background: var(--black);
-
-    border-radius: 30px;
-}
-
-.ios-status-icons {
-    display: flex;
-    align-items: center;
-
-    gap: 7px;
-
-    font-size: 13px;
-}
-
-.ios-status-icons i {
-    color: var(--black);
-}
 
 /* =========================================
    HEADER
@@ -160,55 +105,7 @@ main {
     flex-shrink: 0;
 }
 
-.back-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    width: 32px;
-    height: 36px;
-
-    border: none;
-    background: transparent;
-
-    color: var(--ios-blue);
-
-    font-size: 19px;
-
-    cursor: pointer;
-}
-
-.back-button:hover {
-    opacity: 0.7;
-}
-
-.contact-info {
-    display: flex;
-    align-items: center;
-
-    gap: 7px;
-
-    min-width: 0;
-}
-
-.contact-avatar-wrapper {
-    position: relative;
-
-    width: 40px;
-    height: 40px;
-
-    flex-shrink: 0;
-}
-
-.contact-avatar {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
 
 .online-indicator {
     position: absolute;
@@ -225,63 +122,6 @@ main {
     border-radius: 50%;
 }
 
-.contact-name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    gap: 3px;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    white-space: nowrap;
-}
-
-.contact-name small {
-    color: var(--ios-text-gray);
-
-    font-size: 10px;
-    font-weight: 400;
-}
-
-.contact-chevron {
-    color: #c7c7cc;
-
-    font-size: 11px;
-    margin-left: 2px;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
-}
-
-.video-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 35px;
-    height: 35px;
-
-    border: 1px solid rgba(0, 122, 255, 0.25);
-    border-radius: 50%;
-
-    background: #f4f8ff;
-    color: var(--ios-blue);
-
-    font-size: 14px;
-
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.video-button:hover {
-    background: #e5f0ff;
-}
 
 #clearChatBtn {
     display: flex;
@@ -304,7 +144,8 @@ main {
 }
 
 #clearChatBtn:hover {
-    background: #e5e5ea;
+    background: var(--ios-blue);
+    color: white;
 }
 
 /* =========================================
