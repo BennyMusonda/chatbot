@@ -1,5 +1,7 @@
 # chatbot
 
+## View Live [HERE](https://bennymusonda.github.io/chatbot/)
+
 HTML CSS and JS Chatbot
 
 A lightweight, responsive, and interactive frontend chatbot interface built using vanilla HTML, CSS, and JavaScript. This project provides a clean chat window layout with message bubbles, auto-scrolling, typing indicators, and a flexible script structure ready for hardcoded responses or API integration.
