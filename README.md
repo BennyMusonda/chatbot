@@ -1,45 +1,43 @@
-# chatbot
+# Chatbot
 
-## View Live [HERE](https://bennymusonda.github.io/chatbot/)
+## Live Demo
 
-HTML CSS and JS Chatbot
+[Open the live chatbot demo](https://bennymusonda.github.io/chatbot/).
 
-A lightweight, responsive, and interactive frontend chatbot interface built using vanilla HTML, CSS, and JavaScript. This project provides a clean chat window layout with message bubbles, auto-scrolling, typing indicators, and a flexible script structure ready for hardcoded responses or API integration.
+## About
 
-Features
+A lightweight, responsive, and interactive frontend chatbot interface built with vanilla HTML, CSS, and JavaScript. It features a clean chat window with message bubbles, auto-scrolling, and typing indicators. The flexible script structure is ready for hardcoded responses or API integration.
 
-• Clean and modern chat interface inspired by popular messaging apps.
-• Fully responsive layout that adapts to mobile and desktop screens.
-• Interactive input field with support for both button clicks and the Enter key.
-• Dynamic message rendering distinguishing user and bot inputs with distinct styles.
-• Auto-scrolling functionality to keep the latest messages in view.
-• Easily customizable JavaScript file for handling responses and logic.
+## Features
 
-Project Structure
+- Clean, modern chat interface inspired by popular messaging apps.
+- Responsive layout for mobile and desktop screens.
+- Interactive input supporting both button clicks and the Enter key.
+- Dynamic message rendering with distinct styles for user and bot messages.
+- Auto-scrolling to keep the latest messages in view.
+- Customizable JavaScript for handling responses and chat logic.
 
+## Project Structure
+
+```text
 MESSENGER-AI/
-│
 ├── public/
-│   │
 │   ├── index.html
 │   ├── chatbot.css
 │   ├── chatbot.js
-│   │
 │   ├── knowledge/
 │   │   └── knowledge.js
-│   │
 │   └── imgs/
 │       ├── benny 1.jpg.jpeg
 │       └── bot.jpg
-│
 ├── server.js
 ├── .env
 ├── .gitignore
 └── package.json
+```
 
-Getting Started
+## Getting Started
 
-To run this project locally on your machine, follow these simple steps:
-1. Clone or download this repository to your local machine.
+1. Clone or download this repository.
 2. Open the project folder in your preferred code editor, such as Visual Studio Code.
-3. Open the index.html file directly in any modern web browser, or use a live server extension (like Live Server in VS Code) to view the application.
+3. Open `public/index.html` in a modern web browser, or use a local development server (such as the Live Server extension for VS Code) to view the application.
