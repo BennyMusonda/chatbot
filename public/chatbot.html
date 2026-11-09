@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Document metadata and external resources -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#007aff">
 
     <title>Messenger AI</title>
 
-    <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="/public/chatbot.css">
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
@@ -18,16 +18,22 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Montserrat:wght@100..900&display=swap"
         rel="stylesheet"
     >
 </head>
+
 <body>
+
     <main id="chatbotWindow">
-        <!-- Messenger AI splash screen -->
+
+        <!-- SPLASH SCREEN -->
         <div class="splash-screen" id="splashScreen">
+
             <div class="splash-content">
+
                 <div class="splash-logo">
                     <img
                         src="/imgs/Blue Gradient Robot Chat Bubble Logo.png"
@@ -36,6 +42,7 @@
                 </div>
 
                 <h1>Messenger <span>AI</span></h1>
+
                 <p>Your intelligent companion.</p>
 
                 <div class="splash-loader">
@@ -43,17 +50,186 @@
                     <span></span>
                     <span></span>
                 </div>
+
             </div>
 
             <div class="splash-footer">
                 <span>Powered by Francify Technologies</span>
             </div>
+
         </div>
 
-        <!-- Chatbot header -->
+
+        <!-- FULL WINDOW VOICE CHAT -->
+        <section
+            class="voice-screen"
+            id="voiceScreen"
+            aria-label="Live voice chat"
+            hidden
+        >
+
+            <!-- VOICE HEADER -->
+            <header class="voice-topbar">
+
+                <button
+                    class="voice-close-btn"
+                    id="voiceCloseBtn"
+                    type="button"
+                    aria-label="Close voice chat"
+                    title="Back to messages"
+                >
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="voice-brand">
+
+                    <span class="voice-brand-mark">
+                        <i class="fa-solid fa-comment-dots"></i>
+                    </span>
+
+                    <span>
+                        MESSENGER <strong>AI</strong>
+                    </span>
+
+                </div>
+
+                <span class="voice-live-pill">
+                    <span></span>
+                    LIVE
+                </span>
+
+            </header>
+
+
+            <!-- VOICE MAIN DISPLAY -->
+            <div class="voice-main">
+
+                <!-- ANIMATED VOICE ORB -->
+                <div
+                    class="voice-orb-wrap"
+                    id="voiceOrbWrap"
+                    aria-hidden="true"
+                >
+
+                    <div class="voice-orb-ring ring-one"></div>
+                    <div class="voice-orb-ring ring-two"></div>
+
+                    <div class="voice-orb">
+
+                        <div class="orb-highlight"></div>
+
+                        <i class="fa-solid fa-wave-square"></i>
+
+                    </div>
+
+                </div>
+
+
+                <p class="voice-eyebrow">
+                    MESSENGER AI
+                </p>
+
+                <h2 id="voiceStateTitle">
+                    Ready when you are
+                </h2>
+
+                <p
+                    class="voice-description"
+                    id="voiceStateDescription"
+                >
+                    Start a conversation with your AI assistant.
+                </p>
+
+
+                <!-- SOUND WAVE ANIMATION -->
+                <div
+                    class="voice-waveform"
+                    id="voiceWaveform"
+                    aria-hidden="true"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+
+            <!-- VOICE CONTROLS -->
+            <footer class="voice-controls">
+
+                <button
+                    class="voice-control-btn"
+                    id="voiceMuteBtn"
+                    type="button"
+                    aria-label="Mute microphone"
+                >
+
+                    <span class="voice-control-icon">
+                        <i class="fa-solid fa-microphone"></i>
+                    </span>
+
+                    <span id="voiceMuteLabel">
+                        Mute
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="voice-end-btn"
+                    id="voiceEndBtn"
+                    type="button"
+                    aria-label="End voice chat"
+                >
+                    <i class="fa-solid fa-phone-slash"></i>
+                </button>
+
+
+                <button
+                    class="voice-control-btn voice-more-btn"
+                    id="voicePreviewBtn"
+                    type="button"
+                    aria-label="Preview speaking animation"
+                >
+
+                    <span class="voice-control-icon">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </span>
+
+                    <span>Preview</span>
+
+                </button>
+
+            </footer>
+
+
+            <p class="voice-footnote">
+                A more natural way to talk with Messenger AI.
+            </p>
+
+        </section>
+
+
+        <!-- NORMAL CHAT HEADER -->
         <header class="chat-heading">
+
             <div class="main-title">
-                <a href="/public/chatbot.html">messenger <span>Ai</span></a>
+                <a href="/public/chatbot.html">
+                    messenger <span>Ai</span>
+                </a>
             </div>
 
             <button
@@ -64,29 +240,49 @@
             >
                 <i class="fa-solid fa-trash"></i>
             </button>
+
         </header>
 
-        <!-- Connection status -->
+
+        <!-- CONNECTION STATUS -->
         <div class="connection-status" id="connectionStatus">
+
             <span class="status-indicator"></span>
-            <span id="statusText">Checking connection...</span>
+
+            <span id="statusText">
+                Checking connection...
+            </span>
+
         </div>
 
-        <!-- Chat conversation area -->
+
+        <!-- CHAT CONVERSATION -->
         <div class="chat-container" id="chatContainer">
+
             <div class="message-row bot">
+
                 <div class="message-bubble">
+
                     Hello! I'm Messenger AI.
+
                     <br><br>
+
                     I'm here to chat, answer questions and help you learn.
+
                     <br><br>
+
                     What would you like to talk about?
+
                 </div>
+
             </div>
+
         </div>
 
-        <!-- Message input area -->
+
+        <!-- MESSAGE INPUT -->
         <div class="input-field">
+
             <input
                 type="text"
                 id="textField"
@@ -95,6 +291,20 @@
                 aria-label="Type a message"
             >
 
+
+            <!-- VOICE CHAT BUTTON -->
+            <button
+                class="voice-launch-btn"
+                id="voiceLaunchBtn"
+                type="button"
+                aria-label="Start live voice chat"
+                title="Start live voice chat"
+            >
+                <i class="fa-solid fa-microphone"></i>
+            </button>
+
+
+            <!-- SEND BUTTON -->
             <button
                 class="send-btn"
                 id="sendBtn"
@@ -103,11 +313,17 @@
             >
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
+
         </div>
+
     </main>
 
-    <!-- Offline knowledge and chatbot functionality -->
-    <script src="knowledge/knowledge.js"></script>
-    <script src="chatbot.js"></script>
+
+    <!-- OFFLINE KNOWLEDGE -->
+    <script src="/public/knowledge/knowledge.js"></script>
+
+    <!-- CHATBOT FUNCTIONALITY -->
+    <script src="/public/chatbot.js"></script>
+
 </body>
 </html>

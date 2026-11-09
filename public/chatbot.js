@@ -572,5 +572,164 @@ updateConnectionStatus();
 textField.focus();
 
 // ======================================================
+// 15. LIVE VOICE CHAT - VISUAL DESIGN ONLY
+// ======================================================
+
+const voiceScreen = document.getElementById("voiceScreen");
+
+const voiceLaunchBtn = document.getElementById("voiceLaunchBtn");
+
+const voiceCloseBtn = document.getElementById("voiceCloseBtn");
+
+const voiceMuteBtn = document.getElementById("voiceMuteBtn");
+
+const voiceMuteLabel = document.getElementById("voiceMuteLabel");
+
+const voiceEndBtn = document.getElementById("voiceEndBtn");
+
+const voicePreviewBtn = document.getElementById("voicePreviewBtn");
+
+const voiceStateTitle = document.getElementById("voiceStateTitle");
+
+const voiceStateDescription = document.getElementById("voiceStateDescription");
+
+
+// OPEN VOICE CHAT
+
+function openVoiceChat() {
+
+    if (!voiceScreen) return;
+
+    voiceScreen.hidden = false;
+
+    voiceScreen.classList.remove(
+        "is-speaking",
+        "is-listening"
+    );
+
+    voiceStateTitle.textContent = "Ready when you are";
+
+    voiceStateDescription.textContent =
+        "Start a conversation with your AI assistant.";
+
+    voiceMuteBtn.classList.remove("is-muted");
+
+    voiceMuteBtn.querySelector("i").className =
+        "fa-solid fa-microphone";
+
+    voiceMuteLabel.textContent = "Mute";
+
+}
+
+
+// CLOSE VOICE CHAT
+
+function closeVoiceChat() {
+
+    if (!voiceScreen) return;
+
+    voiceScreen.hidden = true;
+
+    voiceScreen.classList.remove(
+        "is-speaking",
+        "is-listening"
+    );
+
+}
+
+
+// OPEN BUTTON
+
+if (voiceLaunchBtn) {
+
+    voiceLaunchBtn.addEventListener(
+        "click",
+        openVoiceChat
+    );
+
+}
+
+
+// CLOSE BUTTON
+
+if (voiceCloseBtn) {
+
+    voiceCloseBtn.addEventListener(
+        "click",
+        closeVoiceChat
+    );
+
+}
+
+
+// END CALL BUTTON
+
+if (voiceEndBtn) {
+
+    voiceEndBtn.addEventListener(
+        "click",
+        closeVoiceChat
+    );
+
+}
+
+
+// MUTE BUTTON
+
+if (voiceMuteBtn) {
+
+    voiceMuteBtn.addEventListener("click", () => {
+
+        const muted = voiceMuteBtn.classList.toggle("is-muted");
+
+        voiceMuteBtn.querySelector("i").className = muted
+            ? "fa-solid fa-microphone-slash"
+            : "fa-solid fa-microphone";
+
+        voiceMuteLabel.textContent = muted
+            ? "Muted"
+            : "Mute";
+
+        voiceStateTitle.textContent = muted
+            ? "Microphone muted"
+            : "Ready when you are";
+
+        voiceStateDescription.textContent = muted
+            ? "Your microphone control is shown as muted. Voice input is not connected yet."
+            : "The visual voice-chat design is ready to preview.";
+
+        voiceScreen.classList.remove(
+            "is-speaking",
+            "is-listening"
+        );
+
+    });
+
+}
+
+
+// PREVIEW SPEAKING ANIMATION
+
+if (voicePreviewBtn) {
+
+    voicePreviewBtn.addEventListener("click", () => {
+
+        const speaking = voiceScreen.classList.toggle("is-speaking");
+
+        voiceScreen.classList.remove("is-listening");
+
+        voiceStateTitle.textContent = speaking
+            ? "Messenger AI is speaking"
+            : "Ready when you are";
+
+        voiceStateDescription.textContent = speaking
+            ? "This is a visual preview of the AI response animation."
+            : "Start a conversation with your AI assistant.";
+
+    });
+
+}
+
+// ======================================================
 // END OF MESSENGER AI
 // ======================================================
