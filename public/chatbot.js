@@ -572,45 +572,60 @@ updateConnectionStatus();
 textField.focus();
 
 // ======================================================
-// 15. LIVE VOICE CHAT - VISUAL DESIGN ONLY
+// 15. MESSENGER AI - LIVE VOICE CHAT
 // ======================================================
 
 const voiceScreen = document.getElementById("voiceScreen");
-
 const voiceLaunchBtn = document.getElementById("voiceLaunchBtn");
-
 const voiceCloseBtn = document.getElementById("voiceCloseBtn");
-
 const voiceMuteBtn = document.getElementById("voiceMuteBtn");
-
 const voiceMuteLabel = document.getElementById("voiceMuteLabel");
-
 const voiceEndBtn = document.getElementById("voiceEndBtn");
-
 const voicePreviewBtn = document.getElementById("voicePreviewBtn");
 
 const voiceStateTitle = document.getElementById("voiceStateTitle");
-
 const voiceStateDescription = document.getElementById("voiceStateDescription");
 
+// Browser speech recognition support
+const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-// OPEN VOICE CHAT
+let recognition = null;
+let microphoneMuted = false;
+let voiceSessionActive = false;
+let isProcessingVoice = false;
 
-function openVoiceChat() {
 
-    if (!voiceScreen) return;
+// ======================================================
+// 1. UPDATE VOICE SCREEN
+// ======================================================
 
-    voiceScreen.hidden = false;
+function updateVoiceState(title, description, animation = "") {
+
+    voiceStateTitle.textContent = title;
+    voiceStateDescription.textContent = description;
 
     voiceScreen.classList.remove(
         "is-speaking",
         "is-listening"
     );
 
-    voiceStateTitle.textContent = "Ready when you are";
+    if (animation) {
+        voiceScreen.classList.add(animation);
+    }
+}
 
-    voiceStateDescription.textContent =
-        "Start a conversation with your AI assistant.";
+
+// ======================================================
+// 2. OPEN VOICE CHAT
+// ======================================================
+
+function openVoiceChat() {
+
+    voiceScreen.hidden = false;
+
+    voiceSessionActive = true;
+    microphoneMuted = false;
 
     voiceMuteBtn.classList.remove("is-muted");
 
@@ -619,14 +634,30 @@ function openVoiceChat() {
 
     voiceMuteLabel.textContent = "Mute";
 
+    updateVoiceState(
+        "Ready when you are",
+        "Tap the microphone button below to start talking."
+    );
+
+    voicePreviewBtn.querySelector("span").textContent =
+        "Start talking";
 }
 
 
-// CLOSE VOICE CHAT
+// ======================================================
+// 3. CLOSE VOICE CHAT
+// ======================================================
 
 function closeVoiceChat() {
 
-    if (!voiceScreen) return;
+    voiceSessionActive = false;
+    isProcessingVoice = false;
+
+    if (recognition) {
+        recognition.stop();
+    }
+
+    window.speechSynthesis.cancel();
 
     voiceScreen.hidden = true;
 
@@ -634,102 +665,332 @@ function closeVoiceChat() {
         "is-speaking",
         "is-listening"
     );
-
 }
 
 
-// OPEN BUTTON
+// ======================================================
+// 4. SPEAK AI RESPONSE
+// ======================================================
 
-if (voiceLaunchBtn) {
+function speakResponse(message) {
 
-    voiceLaunchBtn.addEventListener(
-        "click",
-        openVoiceChat
+    if (!("speechSynthesis" in window)) {
+        updateVoiceState(
+            "Response ready",
+            "Your browser does not support spoken responses."
+        );
+
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(message);
+
+    speech.lang = "en-US";
+    speech.rate = 1;
+    speech.pitch = 1;
+
+    speech.onstart = function () {
+
+        updateVoiceState(
+            "Messenger AI is speaking",
+            "Listen to the response.",
+            "is-speaking"
+        );
+
+    };
+
+    speech.onend = function () {
+
+        if (!voiceSessionActive) return;
+
+        updateVoiceState(
+            "Ready when you are",
+            "Tap the microphone button to speak again."
+        );
+
+    };
+
+    speech.onerror = function () {
+
+        updateVoiceState(
+            "Response ready",
+            "I couldn't play the spoken response."
+        );
+
+    };
+
+    window.speechSynthesis.speak(speech);
+}
+
+
+// ======================================================
+// 5. PROCESS SPOKEN MESSAGE
+// ======================================================
+
+async function processVoiceMessage(message) {
+
+    if (!message || isProcessingVoice) return;
+
+    isProcessingVoice = true;
+
+    displayMessage(message, "user");
+    saveMessage(message, "user");
+
+    updateVoiceState(
+        "Thinking...",
+        "Messenger AI is preparing a response."
     );
 
+    try {
+
+        // Check built-in offline knowledge first
+        let response = offlineResponse(message);
+
+        // If no offline answer exists, contact Gemini
+        if (response === null) {
+
+            if (navigator.onLine) {
+
+                response = await getAIResponse(message);
+
+            } else {
+
+                response =
+                    "I'm currently offline. Please connect to the internet so I can answer that question.";
+
+            }
+
+        }
+
+        if (!response) {
+
+            response =
+                "Sorry, I couldn't find a suitable answer. Please try again.";
+
+        }
+
+        // Display response in normal chat
+        displayMessage(response, "bot");
+        saveMessage(response, "bot");
+
+        // Read response aloud
+        if (voiceSessionActive) {
+            speakResponse(response);
+        }
+
+    } catch (error) {
+
+        console.error("Voice chat error:", error);
+
+        const errorMessage =
+            "Sorry, I'm having trouble connecting. Please try again.";
+
+        displayMessage(errorMessage, "bot");
+        saveMessage(errorMessage, "bot");
+
+        if (voiceSessionActive) {
+            speakResponse(errorMessage);
+        }
+
+    } finally {
+
+        isProcessingVoice = false;
+
+    }
 }
 
 
-// CLOSE BUTTON
+// ======================================================
+// 6. START LISTENING
+// ======================================================
 
-if (voiceCloseBtn) {
+function startListening() {
 
-    voiceCloseBtn.addEventListener(
-        "click",
-        closeVoiceChat
-    );
+    if (!voiceSessionActive || microphoneMuted || isProcessingVoice) {
+        return;
+    }
 
-}
+    if (!SpeechRecognition) {
 
+        updateVoiceState(
+            "Not supported",
+            "Please open Messenger AI in Google Chrome or Microsoft Edge."
+        );
 
-// END CALL BUTTON
+        return;
+    }
 
-if (voiceEndBtn) {
+    window.speechSynthesis.cancel();
 
-    voiceEndBtn.addEventListener(
-        "click",
-        closeVoiceChat
-    );
+    recognition = new SpeechRecognition();
 
-}
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
 
+    recognition.onstart = function () {
 
-// MUTE BUTTON
-
-if (voiceMuteBtn) {
-
-    voiceMuteBtn.addEventListener("click", () => {
-
-        const muted = voiceMuteBtn.classList.toggle("is-muted");
-
-        voiceMuteBtn.querySelector("i").className = muted
-            ? "fa-solid fa-microphone-slash"
-            : "fa-solid fa-microphone";
-
-        voiceMuteLabel.textContent = muted
-            ? "Muted"
-            : "Mute";
-
-        voiceStateTitle.textContent = muted
-            ? "Microphone muted"
-            : "Ready when you are";
-
-        voiceStateDescription.textContent = muted
-            ? "Your microphone control is shown as muted. Voice input is not connected yet."
-            : "The visual voice-chat design is ready to preview.";
-
-        voiceScreen.classList.remove(
-            "is-speaking",
+        updateVoiceState(
+            "Listening...",
+            "I'm listening. Go ahead and speak.",
             "is-listening"
         );
 
-    });
+    };
+
+    recognition.onresult = function (event) {
+
+        const spokenMessage =
+            event.results[0][0].transcript.trim();
+
+        if (spokenMessage) {
+            processVoiceMessage(spokenMessage);
+        }
+
+    };
+
+    recognition.onerror = function (event) {
+
+        console.error("Microphone error:", event.error);
+
+        if (event.error === "not-allowed") {
+
+            updateVoiceState(
+                "Microphone access denied",
+                "Allow microphone access in your browser settings."
+            );
+
+        } else if (event.error !== "no-speech") {
+
+            updateVoiceState(
+                "Something went wrong",
+                "Please try starting the microphone again."
+            );
+
+        }
+
+    };
+
+    recognition.onend = function () {
+
+        if (
+            voiceSessionActive &&
+            !isProcessingVoice &&
+            !microphoneMuted
+        ) {
+
+            updateVoiceState(
+                "Ready when you are",
+                "Tap the microphone button to speak again."
+            );
+
+        }
+
+    };
+
+    try {
+
+        recognition.start();
+
+    } catch (error) {
+
+        console.error("Could not start microphone:", error);
+
+    }
 
 }
 
 
-// PREVIEW SPEAKING ANIMATION
+// ======================================================
+// 7. BUTTON EVENTS
+// ======================================================
 
+// Open voice screen
+if (voiceLaunchBtn) {
+    voiceLaunchBtn.addEventListener("click", openVoiceChat);
+}
+
+// Close voice screen
+if (voiceCloseBtn) {
+    voiceCloseBtn.addEventListener("click", closeVoiceChat);
+}
+
+// End voice session
+if (voiceEndBtn) {
+    voiceEndBtn.addEventListener("click", closeVoiceChat);
+}
+
+// Start talking
 if (voicePreviewBtn) {
 
-    voicePreviewBtn.addEventListener("click", () => {
+    voicePreviewBtn.addEventListener("click", function () {
 
-        const speaking = voiceScreen.classList.toggle("is-speaking");
+        if (microphoneMuted) {
 
-        voiceScreen.classList.remove("is-listening");
+            updateVoiceState(
+                "Microphone muted",
+                "Unmute your microphone before speaking."
+            );
 
-        voiceStateTitle.textContent = speaking
-            ? "Messenger AI is speaking"
-            : "Ready when you are";
+            return;
+        }
 
-        voiceStateDescription.textContent = speaking
-            ? "This is a visual preview of the AI response animation."
-            : "Start a conversation with your AI assistant.";
+        startListening();
 
     });
 
 }
 
+
+// ======================================================
+// 8. MUTE MICROPHONE
+// ======================================================
+
+if (voiceMuteBtn) {
+
+    voiceMuteBtn.addEventListener("click", function () {
+
+        microphoneMuted = !microphoneMuted;
+
+        if (microphoneMuted) {
+
+            if (recognition) {
+                recognition.stop();
+            }
+
+            voiceMuteBtn.classList.add("is-muted");
+
+            voiceMuteBtn.querySelector("i").className =
+                "fa-solid fa-microphone-slash";
+
+            voiceMuteLabel.textContent = "Unmute";
+
+            updateVoiceState(
+                "Microphone muted",
+                "Your microphone is currently turned off."
+            );
+
+        } else {
+
+            voiceMuteBtn.classList.remove("is-muted");
+
+            voiceMuteBtn.querySelector("i").className =
+                "fa-solid fa-microphone";
+
+            voiceMuteLabel.textContent = "Mute";
+
+            updateVoiceState(
+                "Ready when you are",
+                "Tap the microphone button to start talking."
+            );
+
+        }
+
+    });
+
+}
 // ======================================================
 // END OF MESSENGER AI
 // ======================================================
