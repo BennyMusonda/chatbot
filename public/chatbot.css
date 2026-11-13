@@ -1502,3 +1502,45 @@ main {
         transition: opacity 0.3s ease;
     }
 }
+
+/* START TALKING BUTTON */
+
+.voice-preview-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 18px 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    transition: all 0.3s ease;
+}
+
+.voice-preview-btn i {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.voice-preview-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: translateY(-3px);
+}
+
+.voice-preview-btn:active {
+    transform: scale(0.96);
+}
