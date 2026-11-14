@@ -4,7 +4,7 @@
 <!-- Live Demo -->
 ## Live Demo
 
-[Open the live chatbot demo](https://bennymusonda.github.io/chatbot/).
+[Open the live chatbot demo](https://bennymusonda.github.io/chatbot/public/).
 
 <!-- About -->
 ## About
